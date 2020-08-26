@@ -1,0 +1,3 @@
+<Article xmlns="http://schemas.datacontract.org/2004/07/Model.Models" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><Id>f2a8cf7a3faf4560898887d88e8cd768</Id><Name>Soap</Name><Price>1.99</Price><RemainingQuantity>5</RemainingQuantity></Article>
+<Article xmlns="http://schemas.datacontract.org/2004/07/Model.Models" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><Id>5c7e04c935f844ccb9a78f62240d3d08</Id><Name>Shampoo</Name><Price>5.99</Price><RemainingQuantity>10</RemainingQuantity></Article>
+<Article xmlns="http://schemas.datacontract.org/2004/07/Model.Models" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"><Id>d99a697b731c49c89feabd930e5a7be4</Id><Name>Shower gel</Name><Price>4.99</Price><RemainingQuantity>1</RemainingQuantity></Article>
