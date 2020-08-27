@@ -15,7 +15,7 @@ namespace WcfArticles
         static int count = 0;
         private static string GenerateBillFileName()
         {
-            return $"Racun_{++count}_{DateTime.Now.ToString("dd-MM-yyyy-hh-mm-ss-fff")}.txt";
+            return $"Racun_{++count}_{DateTime.Now.ToString("dd-MM-yyyy_hh-mm-ss")}.txt";
         }
 
         public string[] GetAllArticles()
