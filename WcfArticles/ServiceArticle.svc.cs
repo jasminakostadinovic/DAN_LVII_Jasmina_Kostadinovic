@@ -8,13 +8,17 @@ namespace WcfArticles
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class ServiceArticle : IServiceArticle
     {
+        
+        string articlesPath = AppDomain.CurrentDomain.BaseDirectory + @"\Articles.txt";
         public string[] GetAllArticles()
         {
             try
             {
-                return File.ReadAllLines(ArticlesFile.articlesPath);  
+                if (!File.Exists(articlesPath))
+                    return null;
+                return File.ReadAllLines(articlesPath);  
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
@@ -24,7 +28,7 @@ namespace WcfArticles
         {
             try
             {
-                File.WriteAllLines(ArticlesFile.articlesPath, articles);
+                File.WriteAllLines(articlesPath, articles);
                 return true;
             }
             catch (Exception)

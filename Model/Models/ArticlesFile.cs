@@ -4,6 +4,7 @@ namespace Model.Models
 {
     public class ArticlesFile
     {
-        public static string articlesPath = AppDomain.CurrentDomain.BaseDirectory + @"\Articles.txt";
+        //public static string articlesPath = AppDomain.CurrentDomain.BaseDirectory + @"\Articles.txt";
+    
     }
 }

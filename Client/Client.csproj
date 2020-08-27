@@ -50,8 +50,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="FileOperations\FileAccess.cs" />
+    <Compile Include="Menus\MainMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserInputs\UserInput.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -73,6 +76,10 @@
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{E320DE09-B50E-4F95-AE93-3C5C364CD749}</Project>
       <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WcfArticles\WcfArticles.csproj">
+      <Project>{D4960EB3-4C2C-46AF-B34C-B2480ABE0A7D}</Project>
+      <Name>WcfArticles</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
