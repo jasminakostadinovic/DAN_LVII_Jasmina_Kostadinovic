@@ -1,6 +1,7 @@
 ﻿using Model.Models;
 using System;
 using System.IO;
+using System.Text;
 
 namespace WcfArticles
 {
@@ -10,6 +11,13 @@ namespace WcfArticles
     {
         
         string articlesPath = AppDomain.CurrentDomain.BaseDirectory + @"\Articles.txt";
+        string billPath = AppDomain.CurrentDomain.BaseDirectory + GenerateBillFileName();
+        static int count = 0;
+        private static string GenerateBillFileName()
+        {
+            return $"Racun_{++count}_{DateTime.Now.ToString("dd-MM-yyyy-hh-mm-ss-fff")}.txt";
+        }
+
         public string[] GetAllArticles()
         {
             try
@@ -21,6 +29,19 @@ namespace WcfArticles
             catch (Exception)
             {
                 return null;
+            }
+        }
+
+        public bool TryCreateNewBill(string bill)
+        {
+            try
+            {
+                File.WriteAllText(billPath, bill);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 

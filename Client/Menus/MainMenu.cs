@@ -42,7 +42,7 @@ namespace Client.Menus
                                 shouldRepeat = true;
                                 continue;
                             }
-                        Console.WriteLine(store.ToString());    
+                        Console.WriteLine(store.PrintArticles(store.Articles));    
                    
                         shouldRepeat = true;
                         continue;
@@ -71,7 +71,7 @@ namespace Client.Menus
                             var newArticle = new Article(consoleInputForArticleName, int.Parse(consoleInputForArticleQuantity), decimal.Parse(consoleInputForArticlePrice));
                             store.Articles.Add(newArticle);
                             //updating the file
-                            FileOperations.FileAccess.UpdateFile(store.SerializeArticles());
+                            FileOperations.FileAccess.UpdateFileArticles(store.SerializeArticles());
 
                         Console.WriteLine("You have successfully created the new article.");
                      
@@ -85,7 +85,7 @@ namespace Client.Menus
                             shouldRepeat = true;
                             continue;
                         }
-                        Console.WriteLine(store.ToString());
+                        Console.WriteLine(store.PrintArticles(store.Articles));
                         var consoleInputForSerialNumber = UserInput.GetSerialNumberOfArticle(store.Articles.Count);
                         if (consoleInputForSerialNumber == "#")
                         {
@@ -106,8 +106,69 @@ namespace Client.Menus
                         shouldRepeat = true;
                         continue;
                     case 4:
-                     
-                        shouldRepeat = true;
+                        var purchasedItems = new List<(int, Article)>();
+                        var storeCopy = new Store(store);
+                        Again:
+                        var availableArticles = storeCopy.GetAvailableArticles();
+                        //checking if there are available articles in the store
+                        if (!availableArticles.Any())
+                        {
+                            Console.WriteLine("There are no available articles to be purchased.");
+                            if(purchasedItems.Any())
+                                goto Complete;
+                            shouldRepeat = true;
+                            continue;
+                        }
+                        Console.WriteLine(storeCopy.PrintArticles(availableArticles));
+
+                        var consoleInputForSerialNo = UserInput.GetSerialNumberOfArticle(availableArticles.Count);
+                        if (consoleInputForSerialNo == "#")
+                        {
+                            shouldRepeat = true;
+                            continue;
+                        }
+                        int indexOfArticle = int.Parse(consoleInputForSerialNo) - 1;
+                        var article = availableArticles[indexOfArticle];
+                        var consoleInputForArticlesCount = UserInput.GetCountOfArticle(article.RemainingQuantity);
+                        if (consoleInputForArticlesCount == "#")
+                        {
+                            shouldRepeat = true;
+                            continue;
+                        }
+                        var newQuantity = article.RemainingQuantity - int.Parse(consoleInputForArticlesCount);
+
+                        string idOfArticle = availableArticles[indexOfArticle].Id;
+
+                        storeCopy.TryUpdateArticleRemainingQuantity(idOfArticle, newQuantity);
+                        purchasedItems.Add((int.Parse(consoleInputForArticlesCount), article));
+
+                        Console.WriteLine("To continue purchase press '1'. To complete the purchase press '2'.");
+                        var consoleInputForOption = UserInput.GetOption();
+                        if (consoleInputForOption == "#")
+                        {
+                            shouldRepeat = true;
+                            continue;
+                        }
+                        if (consoleInputForOption == "2")
+                            goto Complete;
+                        else
+                            goto Again;
+
+                        Complete:
+
+                        if (FileOperations.FileAccess.TryCreateNewBillFile(store.GenerateBill(purchasedItems)))
+                        {
+                            Console.WriteLine("You have successfully finished your purchased.");
+                            //updating the file
+                            store = storeCopy;
+                            FileOperations.FileAccess.UpdateFileArticles(store.SerializeArticles());
+                        }                          
+                        else
+                        {
+                            Console.WriteLine("Something went wrong. Bill is not created.");
+                        }
+
+                      shouldRepeat = true;
                         continue;
                     case 5:
                      

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Client.UserInputs
 {
@@ -97,6 +93,60 @@ namespace Client.UserInputs
                 if (!int.TryParse(consoleInput, out result)
                     || result < 1 
                     || result > count)
+                {
+                    Console.WriteLine("Wrong input! Please try again.");
+                    shouldRepeat = true;
+                    continue;
+                }
+                shouldRepeat = false;
+            } while (shouldRepeat);
+            return consoleInput;
+        }
+
+        internal static string GetCountOfArticle(int remainingQuantity)
+        {
+            string consoleInput;
+            bool shouldRepeat;
+            do
+            {
+                shouldRepeat = false;
+                Console.WriteLine(">>>To get back to the menu press '#' + ENTER<<<");
+                Console.WriteLine($"Enter the number of items:");
+                consoleInput = Console.ReadLine();
+                if (consoleInput == "#")
+                    continue;
+                int result;
+                if (!int.TryParse(consoleInput, out result)
+                    || result < 1)
+                {
+                    Console.WriteLine("Wrong input! Please try again.");
+                    shouldRepeat = true;
+                    continue;
+                }
+                if(result > remainingQuantity)
+                {
+                    Console.WriteLine($"Maximum number of items is {remainingQuantity}. Please try again.");
+                    shouldRepeat = true;
+                    continue;
+                }
+                shouldRepeat = false;
+            } while (shouldRepeat);
+            return consoleInput;
+        }
+
+        internal static string GetOption()
+        {
+            string consoleInput;
+            bool shouldRepeat;
+            do
+            {
+                shouldRepeat = false;
+                Console.WriteLine(">>>To get back to the menu press '#' + ENTER<<<");
+                consoleInput = Console.ReadLine();
+                if (consoleInput == "#")
+                    continue;
+                if (string.IsNullOrWhiteSpace(consoleInput)
+                    || (consoleInput != "1" && consoleInput != "2"))
                 {
                     Console.WriteLine("Wrong input! Please try again.");
                     shouldRepeat = true;

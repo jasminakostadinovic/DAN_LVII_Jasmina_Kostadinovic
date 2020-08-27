@@ -34,7 +34,7 @@ namespace Model.Models
 
         public override string ToString()
         {
-            return ($"Article: {Name}, Remaining quantity: {RemainingQuantity},"
+            return ($"Article: {Name}, Remaining quantity: {RemainingQuantity}, "
                 + $"Price: {Price.ToString("C", CultureInfo.CurrentCulture)}");
         }
 
@@ -43,5 +43,9 @@ namespace Model.Models
             Price = price;
         }
 
+        internal void UpdateArticleRemainingQuantity(int remainingQuantity)
+        {
+            RemainingQuantity = remainingQuantity;
+        }
     }
 }

@@ -19,6 +19,12 @@
   <wsdl:message name="IServiceArticle_TryWriteAllArticles_OutputMessage">
     <wsdl:part name="parameters" element="tns:TryWriteAllArticlesResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceArticle_TryCreateNewBill_InputMessage">
+    <wsdl:part name="parameters" element="tns:TryCreateNewBill" />
+  </wsdl:message>
+  <wsdl:message name="IServiceArticle_TryCreateNewBill_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TryCreateNewBillResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceArticle">
     <wsdl:operation name="GetAllArticles">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceArticle/GetAllArticles" message="tns:IServiceArticle_GetAllArticles_InputMessage" />
@@ -27,6 +33,10 @@
     <wsdl:operation name="TryWriteAllArticles">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceArticle/TryWriteAllArticles" message="tns:IServiceArticle_TryWriteAllArticles_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceArticle/TryWriteAllArticlesResponse" message="tns:IServiceArticle_TryWriteAllArticles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TryCreateNewBill">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceArticle/TryCreateNewBill" message="tns:IServiceArticle_TryCreateNewBill_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceArticle/TryCreateNewBillResponse" message="tns:IServiceArticle_TryCreateNewBill_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceArticle" type="tns:IServiceArticle">
@@ -42,6 +52,15 @@
     </wsdl:operation>
     <wsdl:operation name="TryWriteAllArticles">
       <soap:operation soapAction="http://tempuri.org/IServiceArticle/TryWriteAllArticles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TryCreateNewBill">
+      <soap:operation soapAction="http://tempuri.org/IServiceArticle/TryCreateNewBill" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -11,5 +11,8 @@ namespace WcfArticles
 
         [OperationContract]
         bool TryWriteAllArticles(string[] articles);
+
+        [OperationContract]
+        bool TryCreateNewBill(string bill);
     }
 }

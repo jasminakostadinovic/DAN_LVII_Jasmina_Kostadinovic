@@ -14,16 +14,16 @@ namespace Client
             {
                 var store = new Store();
 
-                string[] serializedArticles = FileOperations.FileAccess.LoadFromFile();
+                string[] serializedArticles = FileOperations.FileAccess.LoadFromFileArticles();
 
-                if (FileOperations.FileAccess.LoadFromFile() == null)
+                if (FileOperations.FileAccess.LoadFromFileArticles() == null)
                 {
                     var article1 = new Article("Soap", 5, 1.99M);
                     var article2 = new Article("Shower gel", 1, 4.99M);
                     store.Articles.Add(article1);
                     store.Articles.Add(article2);
                     
-                    FileOperations.FileAccess.UpdateFile(store.SerializeArticles()); 
+                    FileOperations.FileAccess.UpdateFileArticles(store.SerializeArticles()); 
                 }
                 else  
                     store.AddDeserializedArticles(serializedArticles);

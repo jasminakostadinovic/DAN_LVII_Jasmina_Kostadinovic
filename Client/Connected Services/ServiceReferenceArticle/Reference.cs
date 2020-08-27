@@ -26,6 +26,12 @@ namespace Client.ServiceReferenceArticle {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArticle/TryWriteAllArticles", ReplyAction="http://tempuri.org/IServiceArticle/TryWriteAllArticlesResponse")]
         System.Threading.Tasks.Task<bool> TryWriteAllArticlesAsync(string[] articles);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArticle/TryCreateNewBill", ReplyAction="http://tempuri.org/IServiceArticle/TryCreateNewBillResponse")]
+        bool TryCreateNewBill(string bill);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceArticle/TryCreateNewBill", ReplyAction="http://tempuri.org/IServiceArticle/TryCreateNewBillResponse")]
+        System.Threading.Tasks.Task<bool> TryCreateNewBillAsync(string bill);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,6 +75,14 @@ namespace Client.ServiceReferenceArticle {
         
         public System.Threading.Tasks.Task<bool> TryWriteAllArticlesAsync(string[] articles) {
             return base.Channel.TryWriteAllArticlesAsync(articles);
+        }
+        
+        public bool TryCreateNewBill(string bill) {
+            return base.Channel.TryCreateNewBill(bill);
+        }
+        
+        public System.Threading.Tasks.Task<bool> TryCreateNewBillAsync(string bill) {
+            return base.Channel.TryCreateNewBillAsync(bill);
         }
     }
 }
