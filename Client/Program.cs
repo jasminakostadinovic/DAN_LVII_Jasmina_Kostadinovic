@@ -15,7 +15,7 @@ namespace Client
                 var store = new Store();
 
                 string[] serializedArticles = FileOperations.FileAccess.LoadFromFileArticles();
-
+                //adding articles if the store is empty
                 if (FileOperations.FileAccess.LoadFromFileArticles() == null)
                 {
                     var article1 = new Article("Soap", 5, 1.99M);

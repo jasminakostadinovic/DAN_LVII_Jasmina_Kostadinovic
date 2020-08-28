@@ -35,46 +35,46 @@ namespace Client.Menus
                 }
                 switch (inputNumber)
                 {
-                    case 1:                          
-                            if (!store.Articles.Any())
-                            {
-                                Console.WriteLine("There are no available articles to be shown.");
-                                shouldRepeat = true;
-                                continue;
-                            }
-                        Console.WriteLine(store.PrintArticles(store.Articles));    
-                   
+                    case 1:
+                        if (!store.Articles.Any())
+                        {
+                            Console.WriteLine("There are no available articles to be shown.");
+                            shouldRepeat = true;
+                            continue;
+                        }
+                        Console.WriteLine(store.PrintArticles(store.Articles));
+
                         shouldRepeat = true;
                         continue;
                     case 2:
                         //getting values from the user
-                            var consoleInputForArticleName = UserInput.GetNameOfArticle();
-                            if (consoleInputForArticleName == "#")
-                            {
-                                shouldRepeat = true;
-                                continue;
-                            }
-                            var consoleInputForArticlePrice = UserInput.GetPriceOfArticle();
-                            if (consoleInputForArticlePrice == "#")
-                            {
-                                shouldRepeat = true;
-                                continue;
-                            }
+                        var consoleInputForArticleName = UserInput.GetNameOfArticle();
+                        if (consoleInputForArticleName == "#")
+                        {
+                            shouldRepeat = true;
+                            continue;
+                        }
+                        var consoleInputForArticlePrice = UserInput.GetPriceOfArticle();
+                        if (consoleInputForArticlePrice == "#")
+                        {
+                            shouldRepeat = true;
+                            continue;
+                        }
 
-                            var consoleInputForArticleQuantity = UserInput.GetQuantityOfArticle();
-                            if (consoleInputForArticleQuantity == "#")
-                            {
-                                shouldRepeat = true;
-                                continue;
-                            }
+                        var consoleInputForArticleQuantity = UserInput.GetQuantityOfArticle();
+                        if (consoleInputForArticleQuantity == "#")
+                        {
+                            shouldRepeat = true;
+                            continue;
+                        }
 
-                            var newArticle = new Article(consoleInputForArticleName, int.Parse(consoleInputForArticleQuantity), decimal.Parse(consoleInputForArticlePrice));
-                            store.Articles.Add(newArticle);
-                            //updating the file
-                            FileOperations.FileAccess.UpdateFileArticles(store.SerializeArticles());
+                        var newArticle = new Article(consoleInputForArticleName, int.Parse(consoleInputForArticleQuantity), decimal.Parse(consoleInputForArticlePrice));
+                        store.Articles.Add(newArticle);
+                        //updating the file
+                        FileOperations.FileAccess.UpdateFileArticles(store.SerializeArticles());
 
                         Console.WriteLine("You have successfully created the new article.");
-                     
+
                         shouldRepeat = true;
                         continue;
                     case 3:
@@ -86,6 +86,7 @@ namespace Client.Menus
                             continue;
                         }
                         Console.WriteLine(store.PrintArticles(store.Articles));
+                        //getting values from the user
                         var consoleInputForSerialNumber = UserInput.GetSerialNumberOfArticle(store.Articles.Count);
                         if (consoleInputForSerialNumber == "#")
                         {
@@ -99,8 +100,13 @@ namespace Client.Menus
                             continue;
                         }
                         int index = int.Parse(consoleInputForSerialNumber) - 1;
-                        if(store.TryUpdateArticlePrice(index, decimal.Parse(consoleInputForNewArticlePrice)))
+                        //updating the store
+                        if (store.TryUpdateArticlePrice(index, decimal.Parse(consoleInputForNewArticlePrice)))
+                        {
+                            //updating the file
+                            FileOperations.FileAccess.UpdateFileArticles(store.SerializeArticles());
                             Console.WriteLine("You have successfully updated the price of the article.");
+                        }                         
                         else
                             Console.WriteLine("Something went wrong. Price is not updated.");
                         shouldRepeat = true;
@@ -114,7 +120,7 @@ namespace Client.Menus
                         if (!availableArticles.Any())
                         {
                             Console.WriteLine("There are no available articles to be purchased.");
-                            if(purchasedItems.Any())
+                            if (purchasedItems.Any())
                                 goto Complete;
                             shouldRepeat = true;
                             continue;
@@ -162,16 +168,16 @@ namespace Client.Menus
                             //updating the file
                             store = storeCopy;
                             FileOperations.FileAccess.UpdateFileArticles(store.SerializeArticles());
-                        }                          
+                        }
                         else
                         {
                             Console.WriteLine("Something went wrong. Bill is not created.");
                         }
 
-                      shouldRepeat = true;
+                        shouldRepeat = true;
                         continue;
                     case 5:
-                     
+                        //exiting the app
                         shouldRepeat = false;
                         continue;
                     default:
