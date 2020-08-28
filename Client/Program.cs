@@ -1,8 +1,6 @@
 ﻿using Client.Menus;
 using Model.Models;
 using System;
-using System.IO;
-using WcfArticles;
 
 namespace Client
 {

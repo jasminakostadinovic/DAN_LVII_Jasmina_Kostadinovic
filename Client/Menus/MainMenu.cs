@@ -162,12 +162,14 @@ namespace Client.Menus
 
                         Complete:
 
-                        if (FileOperations.FileAccess.TryCreateNewBillFile(store.GenerateBill(purchasedItems)))
+                        var bill = store.GenerateBill(purchasedItems);
+                        if (FileOperations.FileAccess.TryCreateNewBillFile(bill))
                         {
-                            Console.WriteLine("You have successfully finished your purchased.");
                             //updating the file
                             store = storeCopy;
                             FileOperations.FileAccess.UpdateFileArticles(store.SerializeArticles());
+                            Console.WriteLine("You have successfully finished your purchased.");
+                            Console.WriteLine(bill);
                         }
                         else
                         {
